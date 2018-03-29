@@ -131,7 +131,19 @@ export default class CustomMultiPicker extends Component {
           style={[{ padding: 5, height: this.props.scrollViewHeight }, this.props.scrollViewStyle]}
         >
           {labels.map((label, index) => {
-            const itemKey = returnValue == "label" ? label : values[index]
+            var itemKey;
+            if(returnValue == "label"){
+              itemKey = label
+            }
+            else if(returnValue == "value"){
+              itemKey = values[index]
+            }
+            else{
+              itemKey = values[index][returnValue]
+              // contact = values[index]
+              // contact["fullName"]
+            }
+            // const itemKey = returnValue == "label" ? label : values[index]
             return(
               <TouchableOpacity
                 key={Math.round(Math.random() * 1000000)}
