@@ -154,9 +154,10 @@ export default class CustomMultiPicker extends Component {
                   this._onSelect(itemKey)
                 }}
               >
-                <Text>{label}</Text>
+                <Text>{
+                  this.props.labelField ? values[index][this.props.labelField]: label
+                }</Text>
                 {
-
                   this._isSelected(itemKey) ?
                   <Icon name={this.props.selectedIconName}
                         style={[{color: this.props.iconColor, fontSize: this.props.iconSize}, this.props.selectedIconStyle]}
