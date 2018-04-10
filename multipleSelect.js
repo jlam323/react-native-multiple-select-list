@@ -98,9 +98,9 @@ export default class CustomMultiPicker extends Component {
 
   render(){
     const { options, returnValue } = this.props;
-    const list = this.state.searchText ? this.filterObjectByValue(options, option => option[this.props.labelField].toLowerCase().includes(this.state.searchText)) : options
-    const values = Object.keys(list).map(i => list[i])
-    const labels = Object.keys(list)
+    const list = this.state.searchText ? this.filterObjectByValue(options, option => option.toLowerCase().includes(this.state.searchText)) : options
+    const labels = Object.keys(list).map(i => list[i])
+    const values = Object.keys(list)
     return(
       <View onLayout={(evt)=>{this.getNewDimensions(evt)}}>
         {this.props.search && <View style={{ flexDirection: 'row', height: 55 }}>
@@ -131,7 +131,7 @@ export default class CustomMultiPicker extends Component {
           style={[{ padding: 5, height: this.props.scrollViewHeight }, this.props.scrollViewStyle]}
         >
           {labels.map((label, index) => {
-            const itemKey = returnValue == "value" ? values[index] : labels[index]
+            const itemKey = returnValue == "label" ? label : values[index]
             return(
               <TouchableOpacity
                 key={Math.round(Math.random() * 1000000)}
@@ -155,7 +155,7 @@ export default class CustomMultiPicker extends Component {
                 }}
               >
                 <Text>{
-                  this.props.labelField ? list[label][this.props.labelField]: label
+                  this.props.labelField ? values[index][this.props.labelField]: label
                 }</Text>
                 {
                   this._isSelected(itemKey) ?
